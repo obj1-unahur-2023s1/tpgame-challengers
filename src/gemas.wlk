@@ -1,40 +1,58 @@
 import wollok.game.*
 
-	class Gema {
-		var property position 
-		
-		method image()
-		method puntaje()= 15
-		method color()
-	}
+class Gema {
+	var property position = game.at(0,0)
 	
-class Rojo inherits Gema{
-	override method color() = "rojo"
-	override method image()= "GemaRoja.png"
+	method image()
+	method puntaje() = 15
+	method color()
+
+}
+
+class GemaAleatoria inherits Gema{
+	const imagenes = ["GemaRoja.png","GemaAmarilla.png","GemaVerde.png","GemaAzul.png","GemaVioleta.png"]
+	const property color = 0.randomUpTo(5).truncate(0)
+	override method image()= imagenes.get(self.color())
 	
 }
 
-class Naranja inherits Gema{
+
+object marco{
+	method image()= "board2.gif"
+	method position()= game.at(3,1)
+}
+
+/*
+object rojo {
+	override method color() = 0
+	override method image() = "GemaRoja.png"
+}
+
+class Naranja inherits Gema {
 	override method color() = "naranja"
-	override method image()= ""	
+	override method image() = ""
 }
 
-class Amarillo inherits Gema{
+class Amarillo inherits Gema {
 	override method color() = "amarillo"
-	override method image()="GemaAmarilla.png"
+	override method image() = "GemaAmarilla.png"
 }
 
-class Verde inherits Gema{
+class Verde inherits Gema {
 	override method color() = "verde"
-	override method image()= "GemaVerde.png"
+	override method image() = "GemaVerde.png"
 }
 
-class Azul inherits Gema{
+class Azul inherits Gema {
 	override method color() = "azul"
-	override method image()="GemaAzul.png"
+	override method image() = "GemaAzul.png"
 }
 
-class Violeta inherits Gema{
+class Violeta inherits Gema {
 	override method color() = "violeta"
-	override method image()="GemaVioleta.png"
+	override method image() = "GemaVioleta.png"
 }
+
+
+*/
+

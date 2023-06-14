@@ -19,18 +19,41 @@ object nivel {
 	method configurate(){
 	//game.width(8)
 	//game.height(8)
+	//game.addVisual(marco)
+	//game.boardGround("testFondo.jpg")
+	
+	(3..10).forEach{x =>						// agregar gemas Iniciales
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,1)) }
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,2)) }
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,3)) }
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,4)) }
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,5)) }
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,6)) }
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,7)) }		
+	(3..10).forEach{x =>
+		const gema = new GemaAleatoria()
+		game.addVisualIn(gema, game.at(x,8)) }			
+	
 	game.addVisualCharacter(selector)
-	game.addVisual(new Verde(position=game.at(4,5)))
-	game.addVisual(new Verde(position=game.at(5,5)))
-	game.addVisual(new Verde(position=game.at(6,5)))
-	game.addVisual(new Azul(position=game.at(4,3)))
-	game.addVisual(new Azul(position=game.at(5,7)))
-	game.addVisual(new Violeta(position=game.at(5,8)))
-	game.addVisual(new Violeta(position=game.at(6,4)))
-	game.addVisual(new Rojo(position=game.at(5,4)))
-	game.addVisual(new Rojo(position=game.at(5,3)))
-	game.addVisual(new Amarillo(position=game.at(7,6)))
-	game.addVisual(new Amarillo(position=game.at(6,6)))
 	
 	}
+	
+	
+	
+	
+	
+
 }
