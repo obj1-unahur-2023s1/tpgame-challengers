@@ -4,5 +4,6 @@ import nivel.*
 program Bejewollok{
 	nivel.inicio()
 	game.start()
+		
 }
 
