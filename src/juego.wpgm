@@ -1,9 +1,9 @@
 import wollok.game.*
 import nivel.*
+import marco.*
 
 program Bejewollok{
 	nivel.inicio()
-	game.start()
-		
+	game.start()		
 }
 

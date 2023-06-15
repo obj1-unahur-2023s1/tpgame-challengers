@@ -1,6 +1,7 @@
 import wollok.game.*
 import selector.*
 import gemas.*
+import marco.*
 
 object nivel {
 	
@@ -20,7 +21,7 @@ object nivel {
 	}
 	
 	method configurate(){ // estuvimos 3 horas corrigiendo el código porque no anda con addVisualIn
-		game.addVisual(marco)
+		//game.addVisual(marco)
 		
 		(3..10).forEach{x =>						
 		game.addVisual(new GemaAleatoria(position=game.at(x,1))) }
@@ -47,6 +48,7 @@ object nivel {
 		game.addVisual(new GemaAleatoria(position=game.at(x,8))) }		
 	
 	game.addVisualCharacter(selector)
+	
 	
 	}
 
