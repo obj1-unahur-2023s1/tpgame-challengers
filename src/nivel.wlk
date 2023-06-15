@@ -14,6 +14,9 @@ object nivel {
 	game.height(10)
 	keyboard.space().onPressDo{self.configurate()}
 	keyboard.w().onPressDo{ selector.subirGema()}
+	keyboard.s().onPressDo{ selector.bajarGema()}
+	keyboard.d().onPressDo{ selector.moverDerechaGema()}
+	keyboard.a().onPressDo{ selector.moverIzquierdaGema()}
 	}
 	
 	method configurate(){ // estuvimos 3 horas corrigiendo el código porque no anda con addVisualIn
@@ -54,5 +57,3 @@ object nivel {
 	
 	
 	
-
-}

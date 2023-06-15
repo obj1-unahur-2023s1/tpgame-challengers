@@ -12,6 +12,17 @@ class GemaAleatoria {
 	method subir(){
 		position = position.up(1)
 	}
+	method bajar(){
+		position = position.down(1)
+	}
+	
+	method moverDerecha(){
+		position = position.right(1)
+	}
+	method moverIzquierda(){
+		position = position.left(1)
+	}
+	
 }
 
 
