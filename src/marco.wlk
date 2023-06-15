@@ -1,9 +1,12 @@
 import wollok.game.*
 
-/*object marco{
+object marco{
 	method image()= "board.png"
 	method position()= game.at(3,1)
+	method esUnaGema() = false
 	
+	}
+/* 
 	method subir(){}
 	method bajar(){}
 	method moverDerecha(){}
@@ -14,5 +17,4 @@ import wollok.game.*
 	method derGema(){}
 	method izqGema(){}
 	
-	method esUnaGema() = false
 }*/

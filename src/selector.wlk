@@ -9,24 +9,28 @@ object selector {
 	method esUnaGema() = false
 	
 	method subirGema(){ 
-		game.getObjectsIn(self.position()).filter({g=> g.esUnaGema() and g != self}).first().subir()
+		self.gemaActual().subir()
 		position = position.up(1)
 		}
 				
 	method bajarGema(){
-		game.getObjectsIn(self.position()).filter({g=>g.esUnaGema() and g != self}).first().bajar()
+		self.gemaActual().bajar()
 		position = position.down(1)
 		}	
 		
 	method moverDerechaGema(){
-		game.getObjectsIn(self.position()).filter({g=>g.esUnaGema() and g != self}).first().moverDerecha()
+		self.gemaActual().moverDerecha()
 		position = position.right(1)
 		}		
 		
 	method moverIzquierdaGema(){
-		game.getObjectsIn(self.position()).filter({g=>g.esUnaGema() and g != self}).first().moverIzquierda()
+		self.gemaActual().moverIzquierda()
 		position = position.left(1)
 		}
-	}
+		
+	method gemaActual(){
+		return game.getObjectsIn(self.position()).filter({g=>g.esUnaGema() and g != self}).first()
+	}	
+}
 
 

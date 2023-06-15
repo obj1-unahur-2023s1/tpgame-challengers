@@ -1,10 +1,11 @@
 import wollok.game.*
+import selector.*
 
 class GemaAleatoria {
 	
 	var property position = game.at(0,0)
-	const imagenes = ["GemaRoja.png","GemaAmarilla.png","GemaVerde.png","GemaAzul.png","GemaVioleta.png"]
-	const property color = 0.randomUpTo(5).truncate(0)
+	const imagenes = ["GemaRoja.png","GemaAmarilla.png","GemaVerde.png","GemaAzul.png","GemaVioleta.png","GemaBlanca.png"]
+	const property color = 0.randomUpTo(6).truncate(0)
 	
 	method puntaje() = 15
 	method image()= imagenes.get(self.color())
@@ -33,6 +34,9 @@ class GemaAleatoria {
 	method derGema(){position = position.right(1)}
 	method izqGema(){position = position.left(1)}
 	
+	method borrarse(){
+		game.removeVisual(self)
+	}
 	
 }
 

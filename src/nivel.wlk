@@ -18,10 +18,14 @@ object nivel {
 	keyboard.s().onPressDo{ selector.bajarGema()}
 	keyboard.d().onPressDo{ selector.moverDerechaGema()}
 	keyboard.a().onPressDo{ selector.moverIzquierdaGema()}
-	}
+// test						keyboard.h().onPressDo{ self.todasLasGemas().forEach({o => game.say(o,"hola")}) }
+//borrar todas las gemas	keyboard.b().onPressDo{ self.todasLasGemas().forEach({o => game.removeVisual(o)})}
+	keyboard.b().onPressDo{ selector.gemaActual().borrarse()} //borra la gema del selector 
 	
+	keyboard.c().onPressDo{   }
+	}
 	method configurate(){ // estuvimos 3 horas corrigiendo el código porque no anda con addVisualIn
-		//game.addVisual(marco)
+		game.addVisual(marco)
 		
 		(3..10).forEach{x =>						
 		game.addVisual(new GemaAleatoria(position=game.at(x,1))) }
@@ -51,6 +55,8 @@ object nivel {
 	
 	
 	}
+	
+	method todasLasGemas()= game.allVisuals().filter({o => o.esUnaGema()})
 
 	
 }
