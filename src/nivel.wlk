@@ -18,46 +18,55 @@ object nivel {
 	keyboard.s().onPressDo{ selector.bajarGema()}
 	keyboard.d().onPressDo{ selector.moverDerechaGema()}
 	keyboard.a().onPressDo{ selector.moverIzquierdaGema()}
-// test						keyboard.h().onPressDo{ self.todasLasGemas().forEach({o => game.say(o,"hola")}) }
+	keyboard.h().onPressDo{ self.todasLasGemas().forEach({gema =>  gema.borrarMatchVertical()  }) }
 //borrar todas las gemas	keyboard.b().onPressDo{ self.todasLasGemas().forEach({o => game.removeVisual(o)})}
-	keyboard.b().onPressDo{ selector.gemaActual().borrarse()} //borra la gema del selector 
+	keyboard.b().onPressDo{ self.borrarMatches()  } 
+	keyboard.l().onPressDo{ game.say(selector, if(selector.gemaActual().tieneMatch()){"tiene match"}else{"no tiene"})}
+	keyboard.z().onPressDo{ self.todasLasGemas().forEach({gema => game.say(gema, if(gema.tieneMatch()){"tiene match"}else{"no tiene"})}) }
 	
-	keyboard.c().onPressDo{   }
 	}
+	
+
 	method configurate(){ // estuvimos 3 horas corrigiendo el código porque no anda con addVisualIn
-		game.addVisual(marco)
+		game.addVisualIn(marco, game.at(3,1))
 		
 		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,1))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,2))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,3))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,4))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,5))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,6))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,7))) }
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,8))) }		
+		game.addVisual(new GemaAleatoria(position=game.at(x,1)))
+		game.addVisual(new GemaAleatoria(position=game.at(x,2))) 
+		game.addVisual(new GemaAleatoria(position=game.at(x,3))) 
+		game.addVisual(new GemaAleatoria(position=game.at(x,4))) 
+		game.addVisual(new GemaAleatoria(position=game.at(x,5))) 
+		game.addVisual(new GemaAleatoria(position=game.at(x,6))) 
+		game.addVisual(new GemaAleatoria(position=game.at(x,7))) 
+		game.addVisual(new GemaAleatoria(position=game.at(x,8))) 
+		}
 	
-	game.addVisualCharacter(selector)
+		game.addVisualCharacter(selector)
 	
-	
+		
+		self.borrarMatches()
 	}
 	
 	method todasLasGemas()= game.allVisuals().filter({o => o.esUnaGema()})
 
+	method gemasConMatch()= self.todasLasGemas().filter({g => g.tieneMatch() })
+	
+	method borrarMatches(){
+		self.gemasConMatch().forEach({ gema =>
+			if(gema.tieneMatchHorizontal()){
+				gema.borrarMatchHorizontal()}
+			
+		})
+		
+		self.gemasConMatch().forEach({ gema =>
+			if(gema.tieneMatchVertical()){
+				gema.borrarMatchVertical()}
+			})
+		}
+	
+	
+	
+	
 	
 }
 	

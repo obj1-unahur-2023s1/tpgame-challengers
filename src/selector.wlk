@@ -31,6 +31,8 @@ object selector {
 	method gemaActual(){
 		return game.getObjectsIn(self.position()).filter({g=>g.esUnaGema() and g != self}).first()
 	}	
+	
+	
 }
 
 
