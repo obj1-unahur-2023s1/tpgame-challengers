@@ -4,7 +4,7 @@ import gemas.*
 import marco.*
 
 object nivel {
-	
+	var puntaje = 0
 	method inicio(){
 		
 	
@@ -28,7 +28,7 @@ object nivel {
 //	keyboard.b().onPressDo{ self.borrarMatches()  } 
 //	keyboard.l().onPressDo{ game.say(selector, if(selector.gemaActual().tieneMatch()){"tiene match"}else{"no tiene"})}
 //	keyboard.z().onPressDo{ self.todasLasGemas().forEach({gema => game.say(gema, if(gema.tieneMatch()){"tiene match"}else{"no tiene"})}) }
-	
+	keyboard.p().onPressDo{game.say(selector, "Tienes " + puntaje + " puntos.") }	
 	}
 	
 
@@ -50,6 +50,7 @@ object nivel {
 	
 		
 		self.borrarMatches()
+		puntaje = 0
 	}
 	
 	method todasLasGemas()= game.allVisuals().filter({o => o.esUnaGema()})
@@ -59,6 +60,7 @@ object nivel {
 	method borrarMatches(){	//falta agregar sumar los puntos de las gemas rotas
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){
+				puntaje += gema.puntaje()
 				gema.borrarMatchHorizontal()}
 			
 		})

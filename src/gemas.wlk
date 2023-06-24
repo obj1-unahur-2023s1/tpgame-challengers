@@ -4,11 +4,13 @@ import selector.*
 class GemaAleatoria {
 	
 	var property position = game.at(0,0)
-	const imagenes = ["GemaRoja.png","GemaAmarilla.png","GemaVerde.png","GemaAzul.png","GemaVioleta.png","GemaBlanca.png","GemaRosa.png"]
+	const imagenes = [rojo.imagen(),amarillo.imagen(),verde.imagen(),azul.imagen(),violeta.imagen(),blanca.imagen(),rosa.imagen()]
 	const property color = 0.randomUpTo(7).truncate(0)
+	const property puntajes= [rojo.puntaje(), amarillo.puntaje(),verde.puntaje(),azul.puntaje(),violeta.puntaje(),blanca.puntaje(),rosa.puntaje()]
 	
-	method puntaje() = 15
-	method image()= imagenes.get(self.color())
+	method puntaje() = puntajes.get(color)
+	
+	method image()= imagenes.get(color)
 	
 	method subir(){		
 		self.subirGema()
@@ -89,6 +91,60 @@ class GemaAleatoria {
 	method tieneDosGemasAbajo(){
 		return game.getObjectsIn(self.position().down(2)).size() >= 1
 	}
+}
+
+class Color {
+	
+	method imagen()
+	method puntaje()
+}
+object rojo inherits Color {
+	
+	override method imagen()= "GemaRoja.png"
+	
+	override method puntaje()= 20
+}
+
+object amarillo inherits Color {
+	
+	override method imagen()= "GemaAmarilla.png"
+	
+	override method puntaje()= 20
+}
+
+object verde inherits Color {
+	
+	override method imagen()= "GemaVerde.png"
+	
+	override method puntaje()= 20
+}
+
+object azul inherits Color {
+	
+	override method imagen()= "GemaAzul.png"
+	
+	override method puntaje()= 20
+}
+
+object violeta inherits Color {
+	
+	override method imagen()= "GemaVioleta.png"
+	
+	override method puntaje()= 20
+}
+
+object blanca inherits Color {
+	
+	override method imagen()= "GemaBlanca.png"
+	
+	override method puntaje()= 20
+}
+
+object rosa inherits Color {
+	
+	override method imagen()= "GemaRosa.png"
+	
+	override method puntaje()= 20
 }
 
 
