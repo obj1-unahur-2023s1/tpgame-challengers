@@ -13,16 +13,21 @@ object nivel {
 	game.cellSize(110)
 	game.width(14)
 	game.height(10)
+	// movimiento
 	keyboard.space().onPressDo{self.configurate()}
-	keyboard.w().onPressDo{ selector.subirGema()}
-	keyboard.s().onPressDo{ selector.bajarGema()}
-	keyboard.d().onPressDo{ selector.moverDerechaGema()}
-	keyboard.a().onPressDo{ selector.moverIzquierdaGema()}
-	keyboard.h().onPressDo{ self.todasLasGemas().forEach({gema =>  gema.borrarMatchVertical()  }) }
+	keyboard.w().onPressDo{ if(selector.puedeMoverArriba()) selector.subirGema()}
+	keyboard.s().onPressDo{ if(selector.puedeMoverAbajo()) selector.bajarGema()}
+	keyboard.d().onPressDo{ if(selector.puedeMoverDerecha()) selector.moverDerechaGema()}
+	keyboard.a().onPressDo{ if(selector.puedeMoverIzquierda()) selector.moverIzquierdaGema()}
+	keyboard.up().onPressDo{ selector.moverArriba()}
+	keyboard.down().onPressDo{ selector.moverAbajo()}
+	keyboard.left().onPressDo{ selector.moverIzquierda()}
+	keyboard.right().onPressDo{ selector.moverDerecha()}
+//	keyboard.h().onPressDo{ self.todasLasGemas().forEach({gema =>  gema.borrarMatchVertical()  }) }	
 //borrar todas las gemas	keyboard.b().onPressDo{ self.todasLasGemas().forEach({o => game.removeVisual(o)})}
-	keyboard.b().onPressDo{ self.borrarMatches()  } 
-	keyboard.l().onPressDo{ game.say(selector, if(selector.gemaActual().tieneMatch()){"tiene match"}else{"no tiene"})}
-	keyboard.z().onPressDo{ self.todasLasGemas().forEach({gema => game.say(gema, if(gema.tieneMatch()){"tiene match"}else{"no tiene"})}) }
+//	keyboard.b().onPressDo{ self.borrarMatches()  } 
+//	keyboard.l().onPressDo{ game.say(selector, if(selector.gemaActual().tieneMatch()){"tiene match"}else{"no tiene"})}
+//	keyboard.z().onPressDo{ self.todasLasGemas().forEach({gema => game.say(gema, if(gema.tieneMatch()){"tiene match"}else{"no tiene"})}) }
 	
 	}
 	
@@ -41,7 +46,7 @@ object nivel {
 		game.addVisual(new GemaAleatoria(position=game.at(x,8))) 
 		}
 	
-		game.addVisualCharacter(selector)
+		game.addVisual(selector)
 	
 		
 		self.borrarMatches()
@@ -51,7 +56,7 @@ object nivel {
 
 	method gemasConMatch()= self.todasLasGemas().filter({g => g.tieneMatch() })
 	
-	method borrarMatches(){
+	method borrarMatches(){	//falta agregar sumar los puntos de las gemas rotas
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){
 				gema.borrarMatchHorizontal()}
@@ -62,13 +67,19 @@ object nivel {
 			if(gema.tieneMatchVertical()){
 				gema.borrarMatchVertical()}
 			})
+			
+		if(self.hayMatchEnTablero()){ // podríamos usar algo como un while pero lo hicimos recursivo
+			self.borrarMatches()
 		}
+	}
 	
-	
+	method hayMatchEnTablero()= not self.gemasConMatch().isEmpty()
 	
 	
 	
 }
+
+
 	
 
 	
