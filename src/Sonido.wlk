@@ -1,7 +1,7 @@
 import wollok.game.*
 
 object sonido {
-	var musicaDeInicio 
+	var musicaDeInicio = game.sound("musicaGame.mp3")
 	const gemaBorrada = [game.sound("gemaBorrada1.mp3"),game.sound("gemaBorrada2.mp3"),game.sound("gemaBorrada3.mp3"),game.sound("gemaBorrada4.mp3")]
 	
 	method gemaIncorrecta() {
@@ -9,8 +9,8 @@ object sonido {
 	}
 	
 	override method initialize(){
-		musicaDeInicio = game.sound("musicaGame.mp3")
 		musicaDeInicio.shouldLoop(true)
+		musicaDeInicio.volume(0.5)
 		musicaDeInicio.play()
 	}
 	
@@ -27,6 +27,10 @@ object sonido {
 	}
 	
 	method iniciarPartida() {
+		game.sound("start.mp3").volume(0.5)
 		game.sound("start.mp3").play()
+		
+		
 	}
 }
+

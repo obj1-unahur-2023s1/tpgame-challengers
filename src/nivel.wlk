@@ -20,6 +20,8 @@ object nivel {
 	// movimiento
 	keyboard.space().onPressDo{self.configurate()}
 	keyboard.w().onPressDo{ if(selector.puedeMoverArriba()) selector.subirGema()}
+	keyboard.r().onPressDo{ self.reiniciar()}
+	
 	keyboard.s().onPressDo{ if(selector.puedeMoverAbajo()) selector.bajarGema()}
 	keyboard.d().onPressDo{ if(selector.puedeMoverDerecha()) selector.moverDerechaGema()}
 	keyboard.a().onPressDo{ if(selector.puedeMoverIzquierda()) selector.moverIzquierdaGema()}
@@ -27,6 +29,7 @@ object nivel {
 	keyboard.down().onPressDo{ selector.moverAbajo()}
 	keyboard.left().onPressDo{ selector.moverIzquierda()}
 	keyboard.right().onPressDo{ selector.moverDerecha()}
+	
 //	keyboard.h().onPressDo{ self.todasLasGemas().forEach({gema =>  gema.borrarMatchVertical()  }) }	
 //borrar todas las gemas	keyboard.b().onPressDo{ self.todasLasGemas().forEach({o => game.removeVisual(o)})}
 //	keyboard.b().onPressDo{ self.borrarMatches()  } 
@@ -38,24 +41,45 @@ object nivel {
 	
 	
 // estuvimos 3 horas corrigiendo el código porque no anda con addVisualIn
-	
+	method borrarGemaEnPosicion(col,fila){
+		game.removeVisual(game.getObjectsIn(game.at(col,fila)).filter({g=>g.esUnaGema() and g != selector}).first())
+	}
+	method AgregarGemaEnPosicion(col,fila){
+		game.addVisual(new GemaAleatoria(position=game.at(col,fila)))
+	}
+	method generarGemasEnTablero(){
+		(3..10).forEach{x =>						
+		self.AgregarGemaEnPosicion(x,1)
+		self.AgregarGemaEnPosicion(x,2) 
+		self.AgregarGemaEnPosicion(x,3)
+		self.AgregarGemaEnPosicion(x,4)
+		self.AgregarGemaEnPosicion(x,5)
+		self.AgregarGemaEnPosicion(x,6)
+		self.AgregarGemaEnPosicion(x,7) 
+		self.AgregarGemaEnPosicion(x,8)
+		}
+	}
+	method borrarTablero(){
+		(3..10).forEach{x =>
+			self.borrarGemaEnPosicion(x,1)
+			self.borrarGemaEnPosicion(x,2)
+			self.borrarGemaEnPosicion(x,3)
+			self.borrarGemaEnPosicion(x,4)
+			self.borrarGemaEnPosicion(x,5)
+			self.borrarGemaEnPosicion(x,6)
+			self.borrarGemaEnPosicion(x,7)
+			self.borrarGemaEnPosicion(x,8)
+		}
+	}
+	method reiniciar(){ 
+		self.borrarTablero()
+		self.generarGemasEnTablero()
+		self.borrarMatchesInvisible()
+	}
 	method configurate(){ 
 		game.addVisualIn(marco, game.at(3,1))
-		
-		(3..10).forEach{x =>						
-		game.addVisual(new GemaAleatoria(position=game.at(x,1)))
-		game.addVisual(new GemaAleatoria(position=game.at(x,2))) 
-		game.addVisual(new GemaAleatoria(position=game.at(x,3))) 
-		game.addVisual(new GemaAleatoria(position=game.at(x,4))) 
-		game.addVisual(new GemaAleatoria(position=game.at(x,5))) 
-		game.addVisual(new GemaAleatoria(position=game.at(x,6))) 
-		game.addVisual(new GemaAleatoria(position=game.at(x,7))) 
-		game.addVisual(new GemaAleatoria(position=game.at(x,8))) 
-		}
-		
+		self.generarGemasEnTablero()
 		game.addVisual(selector)
-		
-		
 		self.borrarMatchesInvisible()
 		puntaje = 0
 		sonido.iniciarPartida() // hace que el sonido tenga su initialize, sino iniciaba despues de hacer match o movimiento erroneo
@@ -69,16 +93,13 @@ object nivel {
 		//falta agregar sumar los puntos de las gemas rotas
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){
-				puntaje += gema.puntaje()
 				gema.borrarMatchHorizontal()}
 			
 		})
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchVertical()){
-				puntaje += gema.puntaje()
 				gema.borrarMatchVertical()}
 			})
-		
 	}
 	
 	method borrarMatches() {
