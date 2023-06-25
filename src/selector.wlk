@@ -2,6 +2,7 @@ import wollok.game.*
 import gemas.*
 import marco.*
 import nivel.*
+import Sonido.*
 
 object selector {
 	var property image = "selector.png"
@@ -18,9 +19,14 @@ object selector {
 		self.gemaActual().subir()
 		position = position.up(1)
 		if(nivel.hayMatchEnTablero()){
-			nivel.borrarMatches()
+		   // sonido.borrarGema()
+			nivel.borrarMatches() // como los matches se borran al comenzar el juego, es conveniente que el sonido de borrar se repita y no este en nivel.borrarMatches().
+			 // Ese error se soluciono haciendo un borrarMatchesInvisibles() pero trae problema todavia si hay mas de un match, todos los metodos son llamados de distintos lados
+			 // hasta ahora no encontre forma de poner el sonido en un metodo unico para el match. para asegurarse que no se va  a llamar dos veces y generar el error ; wollok.lang.Exception: Un sonido solo se puede reproducir una vez.
 		}
-		else{	// agregar en todos los else un error de movimiento (sonido o mensaje) "cuak"
+		else{
+			sonido.gemaIncorrecta()	
+			// agregar en todos los else un error de movimiento (sonido o mensaje) "cuak"
 			self.gemaActual().bajar()
 			position = position.down(1)
 		}
@@ -30,9 +36,11 @@ object selector {
 		self.gemaActual().bajar()
 		position = position.down(1)
 		if(nivel.hayMatchEnTablero()){
+			//sonido.borrarGema()
 			nivel.borrarMatches()
 		}
 		else{
+			sonido.gemaIncorrecta()	
 			self.gemaActual().subir()
 			position = position.up(1)
 		}		
@@ -42,9 +50,11 @@ object selector {
 		self.gemaActual().moverDerecha()
 		position = position.right(1)
 		if(nivel.hayMatchEnTablero()){
+			//sonido.borrarGema()
 			nivel.borrarMatches()
 		}
 		else{
+			sonido.gemaIncorrecta()
 			self.gemaActual().moverIzquierda()
 			position = position.left(1)
 		}			
@@ -54,9 +64,11 @@ object selector {
 		self.gemaActual().moverIzquierda()
 		position = position.left(1)
 		if(nivel.hayMatchEnTablero()){
+			//sonido.borrarGema()
 			nivel.borrarMatches()
 		}
-		else{	
+		else{
+			sonido.gemaIncorrecta()	
 			self.gemaActual().moverDerecha()
 			position = position.right(1)
 		}			

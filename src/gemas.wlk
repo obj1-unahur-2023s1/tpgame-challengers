@@ -1,5 +1,6 @@
 import wollok.game.*
 import selector.*
+import Sonido.*
 
 class GemaAleatoria {
 	
@@ -41,7 +42,9 @@ class GemaAleatoria {
 	//
 	
 	// borrarGemas
-	method borrarse(){game.removeVisual(self)}
+	method borrarse(){
+		game.removeVisual(self)
+	}
 	
 	method borrarMatchHorizontal(){
 		const posicionDosALaDerecha = self.gemaALaDerecha(2).position()
@@ -53,6 +56,7 @@ class GemaAleatoria {
 		const posicionGema = self.position()
 		self.borrarse()
 		game.addVisual(new GemaAleatoria(position= posicionGema  ))	
+		
 	}
 	
 	method borrarMatchVertical(){
@@ -65,6 +69,7 @@ class GemaAleatoria {
 		const posicionGema = self.position()
 		self.borrarse()
 		game.addVisual(new GemaAleatoria(position= posicionGema ))	
+		
 	}
 	//
 	
