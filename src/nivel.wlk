@@ -2,7 +2,7 @@ import wollok.game.*
 import selector.*
 import gemas.*
 import marco.*
-import Sonido.*
+import sonido.*
 
 object nivel {
 	var puntaje = 0
@@ -72,9 +72,17 @@ object nivel {
 		}
 	}
 	method reiniciar(){ 
+		if (puntaje >= 500){
 		self.borrarTablero()
 		self.generarGemasEnTablero()
 		self.borrarMatchesInvisible()
+		puntaje -= 500
+		game.say(selector, "Tienes " + puntaje + " puntos.") 
+		}
+		else{
+			game.say(selector, "Puntos insuficientes.") 
+			sonido.gemaIncorrecta()
+		}
 	}
 	method configurate(){ 
 		game.addVisualIn(marco, game.at(3,1))
@@ -100,7 +108,9 @@ object nivel {
 			if(gema.tieneMatchVertical()){
 				gema.borrarMatchVertical()}
 			})
-	}
+		if(self.hayMatchEnTablero()){		// resolvimos lo del comentario de abajo
+			self.borrarMatchesInvisible()	
+	}	}
 	
 	method borrarMatches() {
 		//falta agregar sumar los puntos de las gemas rotas

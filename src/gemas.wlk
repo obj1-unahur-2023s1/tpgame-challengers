@@ -1,6 +1,6 @@
 import wollok.game.*
 import selector.*
-import Sonido.*
+import sonido.*
 
 class GemaAleatoria {
 	

@@ -2,7 +2,7 @@ import wollok.game.*
 import gemas.*
 import marco.*
 import nivel.*
-import Sonido.*
+import sonido.*
 
 object selector {
 	var property image = "selector.png"
@@ -20,7 +20,7 @@ object selector {
 		position = position.up(1)
 		if(nivel.hayMatchEnTablero()){
 			nivel.borrarMatches()
-			sonido.borrarGema() // como los matches se borran al comenzar el juego, es conveniente que el sonido de borrar se repita y no este en nivel.borrarMatches().
+			sonido.borrarGemaArriba() // como los matches se borran al comenzar el juego, es conveniente que el sonido de borrar se repita y no este en nivel.borrarMatches().
 			 // Ese error se soluciono haciendo un borrarMatchesInvisibles() pero trae problema todavia si hay mas de un match, todos los metodos son llamados de distintos lados
 			 // hasta ahora no encontre forma de poner el sonido en un metodo unico para el match. para asegurarse que no se va  a llamar dos veces y generar el error ; wollok.lang.Exception: Un sonido solo se puede reproducir una vez.
 		}
@@ -37,7 +37,7 @@ object selector {
 		position = position.down(1)
 		if(nivel.hayMatchEnTablero()){
 			nivel.borrarMatches()
-			sonido.borrarGema()
+			sonido.borrarGemaAbajo()
 		}
 		else{
 			sonido.gemaIncorrecta()	
@@ -51,7 +51,7 @@ object selector {
 		position = position.right(1)
 		if(nivel.hayMatchEnTablero()){
 			nivel.borrarMatches()
-			sonido.borrarGema()
+			sonido.borrarGemaDerecha()
 		}
 		else{
 			sonido.gemaIncorrecta()
@@ -65,7 +65,7 @@ object selector {
 		position = position.left(1)
 		if(nivel.hayMatchEnTablero()){
 			nivel.borrarMatches()
-			sonido.borrarGema()
+			sonido.borrarGemaIzquierda()
 		}
 		else{
 			sonido.gemaIncorrecta()	

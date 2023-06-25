@@ -1,7 +1,7 @@
 import wollok.game.*
 import nivel.*
 import marco.*
-import Sonido.*
+import sonido.*
 
 program Bejewollok{
 	nivel.inicio()
