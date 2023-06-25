@@ -5,6 +5,9 @@ import marco.*
 
 object nivel {
 	var puntaje = 0
+	method puntaje(){
+		return puntaje
+	}
 	method inicio(){
 		
 	
@@ -67,6 +70,7 @@ object nivel {
 		
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchVertical()){
+				puntaje += gema.puntaje()
 				gema.borrarMatchVertical()}
 			})
 			
@@ -80,7 +84,6 @@ object nivel {
 	
 	
 }
-
 
 	
 
