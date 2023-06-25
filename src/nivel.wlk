@@ -29,7 +29,7 @@ object nivel {
 	keyboard.down().onPressDo{ selector.moverAbajo()}
 	keyboard.left().onPressDo{ selector.moverIzquierda()}
 	keyboard.right().onPressDo{ selector.moverDerecha()}
-	
+// tests
 //	keyboard.h().onPressDo{ self.todasLasGemas().forEach({gema =>  gema.borrarMatchVertical()  }) }	
 //borrar todas las gemas	keyboard.b().onPressDo{ self.todasLasGemas().forEach({o => game.removeVisual(o)})}
 //	keyboard.b().onPressDo{ self.borrarMatches()  } 
@@ -98,7 +98,6 @@ object nivel {
 	method gemasConMatch()= self.todasLasGemas().filter({g => g.tieneMatch() })
 	
 	method borrarMatchesInvisible(){
-		//falta agregar sumar los puntos de las gemas rotas
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){
 				gema.borrarMatchHorizontal()}
@@ -113,7 +112,6 @@ object nivel {
 	}	}
 	
 	method borrarMatches() {
-		//falta agregar sumar los puntos de las gemas rotas
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){
 				puntaje += gema.puntaje()
@@ -135,8 +133,6 @@ object nivel {
 	}
 	
 	method hayMatchEnTablero()= not self.gemasConMatch().isEmpty()
-	
-	
 	
 }
 

@@ -8,15 +8,3 @@ object marco{
 	
 	
 	}
-/* 
-	method subir(){}
-	method bajar(){}
-	method moverDerecha(){}
-	method moverizquierda(){}
-	
-	method subirGema(){}
-	method bajarGema(){}
-	method derGema(){}
-	method izqGema(){}
-	
-}*/
