@@ -9,6 +9,7 @@
 
 ## Capturas
 
+![Menu](screens/screen.jpg?raw=true "Menu")
 
 ## Reglas de Juego / Instrucciones
 
