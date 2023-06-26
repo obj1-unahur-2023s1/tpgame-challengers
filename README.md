@@ -1,4 +1,4 @@
-# Bejewollok
+﻿# Bejewollok
 
 ## Equipo de desarrollo
 
@@ -9,7 +9,6 @@
 
 ## Capturas
 
-(agregar)
 
 ## Reglas de Juego / Instrucciones
 
@@ -25,6 +24,13 @@ La jerarquia de Gemas en cuanto a puntos es asi:
 	Corazon: Tres lineas (60 puntos)
 	Diamante Rojo: Tres lineas (45 puntos)
 	Gema Verde: Tres lineas (30 puntos)
+
+El objetivo es llegar a los 5000 puntos!
+
+Con las flechitas se mueve el cabezal,
+Con WASD movemos las gemas respectivamente.
+Con la P podemos visualizar los puntos.
+Con la R reiniciamos el tablero por 500 puntos
 
 ## Otros
 

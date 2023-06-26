@@ -13,7 +13,8 @@ object nivel {
 		
 	
 	game.title("BejeWollok")
-	game.boardGround("fondo1.jpg")
+	game.addVisualIn(fondo, game.at(0,0))
+	
 	game.cellSize(110)
 	game.width(14)
 	game.height(10)
@@ -36,7 +37,11 @@ object nivel {
 //	keyboard.l().onPressDo{ game.say(selector, if(selector.gemaActual().tieneMatch()){"tiene match"}else{"no tiene"})}
 //	keyboard.z().onPressDo{ self.todasLasGemas().forEach({gema => game.say(gema, if(gema.tieneMatch()){"tiene match"}else{"no tiene"})}) }
 	keyboard.p().onPressDo{game.say(selector, "Tienes " + puntaje + " puntos.") }
-	
+	game.onTick(5000, "fijarse si se gana", {
+		if(puntaje > 5000){
+			self.ganar()
+		}
+		})
 	}
 	
 	
@@ -76,6 +81,7 @@ object nivel {
 		self.borrarTablero()
 		self.generarGemasEnTablero()
 		self.borrarMatchesInvisible()
+		sonido.reiniciar()		
 		puntaje -= 500
 		game.say(selector, "Tienes " + puntaje + " puntos.") 
 		}
@@ -85,6 +91,7 @@ object nivel {
 		}
 	}
 	method configurate(){ 
+		fondo.image(fondo.imagenNivel1())
 		game.addVisualIn(marco, game.at(3,1))
 		self.generarGemasEnTablero()
 		game.addVisual(selector)
@@ -133,7 +140,15 @@ object nivel {
 	}
 	
 	method hayMatchEnTablero()= not self.gemasConMatch().isEmpty()
-	
+
+	method ganar(){
+			game.clear()
+			fondo.image(fondo.imagenVictoria())
+			game.addVisualIn(fondo, game.at(0,0))
+			sonido.musicaDeInicio().stop()
+			sonido.victoria()
+		
+	}	
 }
 
 	

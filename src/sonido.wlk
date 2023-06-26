@@ -1,7 +1,7 @@
 import wollok.game.*
 
 object sonido {
-    const musicaDeInicio = game.sound("musicaGame.mp3")
+    const property musicaDeInicio = game.sound("musicaGame.mp3")
     const sonidoInicio = game.sound("start.mp3")
     method gemaIncorrecta() {
     game.sound("gemaIncorrecta.mp3").play()
@@ -12,11 +12,6 @@ object sonido {
         musicaDeInicio.volume(0.1)
         musicaDeInicio.play()
     }
-
-    method musicaDeInicio() {
-        return musicaDeInicio
-    }
-
 
     method iniciarPartida() {
         sonidoInicio.volume(0.03)
@@ -40,5 +35,12 @@ object sonido {
         game.sound("gemaBorrada4.mp3").play()
     }
 
+	method reiniciar(){
+		game.sound("reiniciar.mp3").play()
+	}
 
+	method victoria(){
+		game.sound("victoria.mp3").play()
+		
+	}
 }
