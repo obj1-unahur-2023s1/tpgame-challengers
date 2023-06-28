@@ -6,6 +6,7 @@ import sonido.*
 
 object nivel {
 	var puntaje = 0
+	var juegoTerminado = false
 	method puntaje(){
 		return puntaje
 	}
@@ -37,7 +38,7 @@ object nivel {
 //	keyboard.l().onPressDo{ game.say(selector, if(selector.gemaActual().tieneMatch()){"tiene match"}else{"no tiene"})}
 //	keyboard.z().onPressDo{ self.todasLasGemas().forEach({gema => game.say(gema, if(gema.tieneMatch()){"tiene match"}else{"no tiene"})}) }
 	keyboard.p().onPressDo{game.say(selector, "Tienes " + puntaje + " puntos.") }
-	game.onTick(5000, "fijarse si se gana", {
+	game.onTick(2500, "fijarse si se gana", {
 		if(puntaje > 5000){
 			self.ganar()
 		}
@@ -97,7 +98,7 @@ object nivel {
 		game.addVisual(selector)
 		self.borrarMatchesInvisible()
 		puntaje = 0
-		sonido.iniciarPartida() // hace que el sonido tenga su initialize, sino iniciaba despues de hacer match o movimiento erroneo
+		if(not juegoTerminado){sonido.iniciarPartida()}// hace que el sonido tenga su initialize, sino iniciaba despues de hacer match o movimiento erroneo
 	}
 	
 	method todasLasGemas()= game.allVisuals().filter({o => o.esUnaGema()})
@@ -142,11 +143,20 @@ object nivel {
 	method hayMatchEnTablero()= not self.gemasConMatch().isEmpty()
 
 	method ganar(){
+			puntaje = 0
+			juegoTerminado = true
 			game.clear()
 			fondo.image(fondo.imagenVictoria())
 			game.addVisualIn(fondo, game.at(0,0))
-			sonido.musicaDeInicio().stop()
+			sonido.musicaDeInicio().pause()
 			sonido.victoria()
+			game.schedule(5000,{
+				fondo.image(fondo.imagenMenuSinHelp())
+				game.clear()	
+				self.inicio()
+				sonido.musicaDeInicio().resume()
+			} )
+			
 		
 	}	
 }
