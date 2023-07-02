@@ -7,21 +7,6 @@ import sonido.*
 object nivel {
 	var puntaje = 0
 	var juegoTerminado = false
-	// Linea nueva puntajes
-	var property pantalla =[]
-		var property pantallas = []
-		var property v1 = 0
-		var property v2 = 0
-		var property v3 = 0
-		var property v4 = 0
-		
-		method v1() = v1
-		method v2() = v2
-		method v3() = v3
-		method v4() = v4
-	//
-	
-	
 	method puntaje(){
 		return puntaje
 	}
@@ -113,10 +98,10 @@ object nivel {
 		game.addVisual(selector)
 		
 		// Linea Puntajes
-		game.addVisual(dd1)
-		game.addVisual(dd2)
-		game.addVisual(dd3)
-		game.addVisual(dd4)
+		game.addVisual(digito1)
+		game.addVisual(digito2)
+		game.addVisual(digito3)
+		game.addVisual(digito4)
 		//
 		self.borrarMatchesInvisible()
 		puntaje = 0
@@ -197,112 +182,107 @@ object nivel {
 	// Todo lo que sigue es de puntajes
 	method puntajeEnPantalla(){
 		
-		game.removeVisual(dd1)
-		game.removeVisual(dd2)
-		game.removeVisual(dd3)
-		game.removeVisual(dd4)
+		game.removeVisual(digito1)
+		game.removeVisual(digito2)
+		game.removeVisual(digito3)
+		game.removeVisual(digito4)
 			
-		self.agregarPrimerValor()		
+		self.setearDigitos()		
 		
-		game.addVisual(dd1)	
-		game.addVisual(dd2)	
-		game.addVisual(dd3)	
-		game.addVisual(dd4)
+		game.addVisual(digito1)	
+		game.addVisual(digito2)	
+		game.addVisual(digito3)	
+		game.addVisual(digito4)
 		
 		
 	}
-	method agregarPrimerValor()  {  
+	method setearDigitos(){  
 		
 		if(puntaje.digits() == 1)  {
-			v4 = puntaje
-			v3 = 0 
-			v2 = 0
-			v1 = 0
+			digito4.valorD4(puntaje)
+			digito3.valorD3(0) 
+			digito2.valorD2(0)
+			digito1.valorD1(0)
 		}			  						
 		if(puntaje.digits() == 2){  
-			v3 = puntaje.div(10)
-			v4 = puntaje - v3 * 10
-			v2 = 0
-			v1 = 0
+			digito3.valorD3(puntaje.div(10)) 
+			digito4.valorD4(puntaje - digito3.valorD3() * 10) 
+			digito2.valorD2(0)
+			digito1.valorD1(0)
 		} 						
 		if(puntaje.digits() == 3){  
-			v2 = puntaje.div(100)
-			v3 =(puntaje - v2 * 100).div(10)
-			v4 = puntaje - v2 * 100 - v3 * 10
-			v1 = 0
+			digito2.valorD2( puntaje.div(100)) 
+			digito3.valorD3((puntaje - digito2.valorD2() * 100).div(10))
+			digito4.valorD4( puntaje - digito2.valorD2() * 100 - digito3.valorD3() * 10) 
+			digito1.valorD1(0)
 		}					
 		if(puntaje.digits() == 4){					
-			v1 =  puntaje.div(1000)
-			v2 = (puntaje - v1 * 1000).div(100)
-			v3 = (puntaje - v1 * 1000 - v2 * 100).div(10)
-			v4 = (puntaje - v1 * 1000 - v2 * 100 - v3 * 10 ).div(1)
+			digito1.valorD1( puntaje.div(1000))  
+			digito2.valorD2((puntaje - digito1.valorD1() * 1000).div(100))
+			digito3.valorD3((puntaje - digito1.valorD1() * 1000 - digito2.valorD2() * 100).div(10))
+			digito4.valorD4( puntaje - digito1.valorD1() * 1000 - digito2.valorD2() * 100 - digito3.valorD3() * 10 ) 
 			
-				}
-		dd1.vv1(v1)
-		dd2.vv2(v2)
-		dd3.vv3(v3)
-		dd4.vv4(v4)
 	}
 
-}
-class Dd{
-	const property a = [d0,d1,d2,d3,d4,d5,d6,d7,d8,d9]
+}}
+class Digito{
+	const property listaNumeros = [numero0,numero1,numero2,numero3,numero4,numero5,numero6,numero7,numero8,numero9]
 	method esUnaGema() = false
 	method position()
 	method image()
 }
 
-object dd1 inherits Dd{
-	var property vv1 = 0
-	override method position() = game.at(0,1)
-	override method image() = a.get(vv1).image()
+object digito1 inherits Digito{
+	var property valorD1 = 0
+	override method position() = game.at(5,9)
+	override method image() = listaNumeros.get(valorD1).image()
 	
 }
-object dd2 inherits Dd{
-	var property vv2 = 0
-	override method position() = game.at(1,1)
-	override method image() = a.get(vv2).image()
+object digito2 inherits Digito{
+	var property valorD2 = 0
+	override method position() = game.at(6,9)
+	override method image() = listaNumeros.get(valorD2).image()
 
 }
-object dd3 inherits Dd{
-	var property vv3 = 0
-	override method position() = game.at(2,1)
-	override method image() = a.get(vv3).image()
+object digito3 inherits Digito{
+	var property valorD3 = 0
+	override method position() = game.at(7,9)
+	override method image() = listaNumeros.get(valorD3).image()
 	}
-object dd4 inherits Dd{
-	var property vv4 = 0
-	override method position() = game.at(3,1)
-	override method image() = a.get(vv4).image()
+object digito4 inherits Digito{
+	var property valorD4 = 0
+	override method position() = game.at(8,9)
+	override method image() = listaNumeros.get(valorD4).image()
 	}
 	
-object d0{
+object numero0{
 	var property image = "num0.png"
 }
-object d1{
+object numero1{
 	var property image = "num1.png"
 }
-object d2{
+object numero2{
 	var property image = "num2.png"
 }
-object d3{
+object numero3{
 	var property image = "num3.png"
 }
-object d4{
+object numero4{
 	var property image = "num4.png"
 }
-object d5{
+object numero5{
 	var property image = "num5.png"
 }
-object d6{
+object numero6{
 	var property image = "num6.png"
 }
-object d7{
+object numero7{
 	var property image = "num7.png"
 }
-object d8{
+object numero8{
 	var property image = "num8.png"
 }
-object d9{
+object numero9{
 	var property image = "num9.png"
 }
 	

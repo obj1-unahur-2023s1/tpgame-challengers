@@ -11,7 +11,7 @@ object marco{
 		var property image = self.imagenMenuSinHelp()
 		
 		method imagenMenu()= "menu1.png"
-		method imagenNivel1()= "nivel1.png"
+		method imagenNivel1()= "nivel1.jpg"
 		method imagenMenuSinHelp()= "menuSinH.jpg"
 		method esUnaGema() = false
 		method imagenVictoria()= "victoria.jpg"
