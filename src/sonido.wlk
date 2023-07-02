@@ -17,7 +17,7 @@ object sonido {
         sonidoInicio.volume(0.03)
         sonidoInicio.play()
     }
-
+	
 
     method borrarGemaIzquierda() {
         game.sound("gemaBorrada1.mp3").play()
@@ -43,4 +43,15 @@ object sonido {
 		game.sound("victoria.mp3").play()
 		
 	}
+	// agregue (franco) esto para resolver el sonido cuando ganas o perdes.
+	method reproducirSiSePuede(){
+		if( self.estaEnPausa())
+			musicaDeInicio.resume()
+	}
+	method pausarSiSePuede(){
+		if(! self.estaEnPausa())
+			musicaDeInicio.pause()
+		
+	}
+	method estaEnPausa() = musicaDeInicio.paused()
 }

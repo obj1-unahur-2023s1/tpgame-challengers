@@ -45,6 +45,35 @@ class GemaAleatoria {
 	method borrarse(){
 		game.removeVisual(self)
 	}
+	method borrarMatchVerticalCuadruple(){
+		const posicionTresAbajo = self.gemaAbajo(3).position()
+		self.gemaAbajo(3).borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionTresAbajo  ))
+		const posicionDosAbajo = self.gemaAbajo(2).position()
+		self.gemaAbajo(2).borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionDosAbajo  ))
+		const posicionUnoAbajo = self.gemaAbajo(1).position()
+		self.gemaAbajo(1).borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionUnoAbajo ))
+		const posicionGema = self.position()
+		self.borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionGema ))	
+		
+	}
+	method borrarMatchHorizontalCuadruple(){
+		const posicionTresALaDerecha = self.gemaALaDerecha(3).position()
+		self.gemaALaDerecha(3).borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionTresALaDerecha ))
+		const posicionDosALaDerecha = self.gemaALaDerecha(2).position()
+		self.gemaALaDerecha(2).borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionDosALaDerecha ))
+		const posicionUnaALaDerecha = self.gemaALaDerecha(1).position()
+		self.gemaALaDerecha(1).borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionUnaALaDerecha  ))
+		const posicionGema = self.position()
+		self.borrarse()
+		game.addVisual(new GemaAleatoria(position= posicionGema  ))	
+	}
 	
 	method borrarMatchHorizontal(){
 		const posicionDosALaDerecha = self.gemaALaDerecha(2).position()
@@ -75,8 +104,11 @@ class GemaAleatoria {
 	
 	// verificarMatches 
 	method tieneMatch(){
-		return self.tieneMatchVertical() or self.tieneMatchHorizontal()
+		return //self.tieneMatchHorizontalCuadruple() or self.tieneMatchVerticalCuadruple() 
+		self.tieneMatchVertical() or self.tieneMatchHorizontal()
 	}
+	method tieneMatchHorizontalCuadruple(){
+		return self.tieneGemasALaDerecha(3) and (self.color() == self.gemaALaDerecha(1).color() and self.color() == self.gemaALaDerecha(2).color() and self.color() == self.gemaALaDerecha(3).color())}
 	
 	method tieneMatchHorizontal(){
 		return self.tieneGemasALaDerecha(2) and (self.color() == self.gemaALaDerecha(1).color() and self.color() == self.gemaALaDerecha(2).color())
@@ -85,6 +117,8 @@ class GemaAleatoria {
 	method tieneMatchVertical(){
 		return self.tieneGemasAbajo(2) and (self.color() == self.gemaAbajo(1).color() and self.color() == self.gemaAbajo(2).color())
 	}
+	method tieneMatchVerticalCuadruple(){
+		return self.tieneGemasAbajo(3) and (self.color() == self.gemaAbajo(1).color() and self.color() == self.gemaAbajo(2).color() and self.color() == self.gemaAbajo(3).color())}
 	//
 	
 	// verificarGemasAdyacentesssss
