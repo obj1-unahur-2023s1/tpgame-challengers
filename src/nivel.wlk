@@ -85,7 +85,6 @@ object nivel {
 		self.borrarMatches()
 		sonido.reiniciar()		
 		puntaje = points - 500
-		game.say(selector, "Tienes " + puntaje + " puntos.") 
 		self.setearDigitos()
 		}
 		else{
