@@ -31,6 +31,7 @@ object nivel {
 	keyboard.down().onPressDo{ selector.moverAbajo()}
 	keyboard.left().onPressDo{ selector.moverIzquierda()}
 	keyboard.right().onPressDo{ selector.moverDerecha()}
+	
 // tests
 //	keyboard.h().onPressDo{ self.todasLasGemas().forEach({gema =>  gema.borrarMatchVertical()  }) }	
 //borrar todas las gemas	keyboard.b().onPressDo{ self.todasLasGemas().forEach({o => game.removeVisual(o)})}
@@ -78,14 +79,12 @@ object nivel {
 		}
 	}
 	method reiniciar(){ 
-		var points = puntaje
 		if (puntaje >= 500){
+		puntaje -= 500
 		self.borrarTablero()
 		self.generarGemasEnTablero()
-		self.borrarMatches()
+		self.borrarMatchesInvisible()
 		sonido.reiniciar()		
-		puntaje = points - 500
-		self.setearDigitos()
 		}
 		else{
 			game.say(selector, "Puntos insuficientes.") 
@@ -98,7 +97,6 @@ object nivel {
 		self.generarGemasEnTablero()
 		game.addVisual(selector)
 		
-		// Linea Puntajes
 		game.addVisual(digito1)
 		game.addVisual(digito2)
 		game.addVisual(digito3)
@@ -126,9 +124,7 @@ object nivel {
 		if(self.hayMatchEnTablero()){		// resolvimos lo del comentario de abajo
 			self.borrarMatchesInvisible()	
 	}
-	// Linea puntajes
-	self.puntajeEnPantalla()
-		}
+}
 	
 	method borrarMatches() {
 		self.gemasConMatch().forEach({ gema =>
@@ -157,9 +153,7 @@ object nivel {
 		else{                           // wollok.lang.Exception: Un sonido solo se puede reproducir una vez.
 			         // cada vez que entra en la recursividad el sonido se bugea, por eso las dos versiones
 		}
-		//Linea puntajes
-		self.puntajeEnPantalla()
-	}
+			}
 	
 	method hayMatchEnTablero()= not self.gemasConMatch().isEmpty()
 
@@ -176,56 +170,8 @@ object nivel {
 				game.clear()	
 				self.inicio()
 			} )
-			
-		
 	}	
-	
-	// Todo lo que sigue es de puntajes
-	method puntajeEnPantalla(){
-		
-		game.removeVisual(digito1)
-		game.removeVisual(digito2)
-		game.removeVisual(digito3)
-		game.removeVisual(digito4)
-			
-		self.setearDigitos()		
-		
-		game.addVisual(digito1)	
-		game.addVisual(digito2)	
-		game.addVisual(digito3)	
-		game.addVisual(digito4)
-		
-		
 	}
-	method setearDigitos(){  
-		
-		if(puntaje.digits() == 1)  {
-			digito4.valorD4(puntaje)
-			digito3.valorD3(0) 
-			digito2.valorD2(0)
-			digito1.valorD1(0)
-		}			  						
-		if(puntaje.digits() == 2){  
-			digito3.valorD3(puntaje.div(10)) 
-			digito4.valorD4(puntaje - digito3.valorD3() * 10) 
-			digito2.valorD2(0)
-			digito1.valorD1(0)
-		} 						
-		if(puntaje.digits() == 3){  
-			digito2.valorD2( puntaje.div(100)) 
-			digito3.valorD3((puntaje - digito2.valorD2() * 100).div(10))
-			digito4.valorD4( puntaje - digito2.valorD2() * 100 - digito3.valorD3() * 10) 
-			digito1.valorD1(0)
-		}					
-		if(puntaje.digits() == 4){					
-			digito1.valorD1( puntaje.div(1000))  
-			digito2.valorD2((puntaje - digito1.valorD1() * 1000).div(100))
-			digito3.valorD3((puntaje - digito1.valorD1() * 1000 - digito2.valorD2() * 100).div(10))
-			digito4.valorD4( puntaje - digito1.valorD1() * 1000 - digito2.valorD2() * 100 - digito3.valorD3() * 10 ) 
-			
-	}
-
-}}
 class Digito{
 	const property listaNumeros = [numero0,numero1,numero2,numero3,numero4,numero5,numero6,numero7,numero8,numero9]
 	method esUnaGema() = false
@@ -234,26 +180,26 @@ class Digito{
 }
 
 object digito1 inherits Digito{
-	var property valorD1 = 0
+	method valorD1() = nivel.puntaje().div(1000)
 	override method position() = game.at(5,9)
-	override method image() = listaNumeros.get(valorD1).image()
+	override method image() = listaNumeros.get(self.valorD1()).image()
 	
 }
 object digito2 inherits Digito{
-	var property valorD2 = 0
+	method valorD2() = (nivel.puntaje() % 1000).div(100)
 	override method position() = game.at(6,9)
-	override method image() = listaNumeros.get(valorD2).image()
+	override method image() = listaNumeros.get(self.valorD2()).image()
 
 }
 object digito3 inherits Digito{
-	var property valorD3 = 0
+	method valorD3() = (nivel.puntaje() % 100).div(10)
 	override method position() = game.at(7,9)
-	override method image() = listaNumeros.get(valorD3).image()
+	override method image() = listaNumeros.get(self.valorD3()).image()
 	}
 object digito4 inherits Digito{
-	var property valorD4 = 0
+	method valorD4()= nivel.puntaje() % 10
 	override method position() = game.at(8,9)
-	override method image() = listaNumeros.get(valorD4).image()
+	override method image() = listaNumeros.get(self.valorD4()).image()
 	}
 	
 object numero0{
@@ -286,13 +232,3 @@ object numero8{
 object numero9{
 	var property image = "num9.png"
 }
-	
-	
-
-
-
-	
-
-	
-	
-	
