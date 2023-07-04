@@ -132,7 +132,7 @@ object nivel {
 		}
 	
 	method borrarMatches() {
-		/*self.gemasConMatch().forEach({ gema =>
+		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontalCuadruple()){
 				puntaje += gema.puntaje() * 2
 				gema.borrarMatchHorizontalCuadruple()}})
@@ -140,7 +140,7 @@ object nivel {
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchVerticalCuadruple()){
 				puntaje += gema.puntaje() * 2
-				gema.borrarMatchVerticalCuadruple()}})*/
+				gema.borrarMatchVerticalCuadruple()}})
 				
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){
