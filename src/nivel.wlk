@@ -78,13 +78,15 @@ object nivel {
 		}
 	}
 	method reiniciar(){ 
+		var points = puntaje
 		if (puntaje >= 500){
 		self.borrarTablero()
 		self.generarGemasEnTablero()
 		self.borrarMatches()
 		sonido.reiniciar()		
-		puntaje -= 500
+		puntaje = points - 500
 		game.say(selector, "Tienes " + puntaje + " puntos.") 
+		self.setearDigitos()
 		}
 		else{
 			game.say(selector, "Puntos insuficientes.") 
@@ -130,15 +132,15 @@ object nivel {
 		}
 	
 	method borrarMatches() {
-		//self.gemasConMatch().forEach({ gema =>
-			//if(gema.tieneMatchHorizontalCuadruple()){
-				//puntaje += gema.puntaje() * 2
-				//gema.borrarMatchHorizontalCuadruple()}})
+		/*self.gemasConMatch().forEach({ gema =>
+			if(gema.tieneMatchHorizontalCuadruple()){
+				puntaje += gema.puntaje() * 2
+				gema.borrarMatchHorizontalCuadruple()}})
 		
-		//self.gemasConMatch().forEach({ gema =>
-			//if(gema.tieneMatchVerticalCuadruple()){
-				//puntaje += gema.puntaje() * 2
-				//gema.borrarMatchVerticalCuadruple()}})
+		self.gemasConMatch().forEach({ gema =>
+			if(gema.tieneMatchVerticalCuadruple()){
+				puntaje += gema.puntaje() * 2
+				gema.borrarMatchVerticalCuadruple()}})*/
 				
 		self.gemasConMatch().forEach({ gema =>
 			if(gema.tieneMatchHorizontal()){

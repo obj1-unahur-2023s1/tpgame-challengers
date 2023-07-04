@@ -146,49 +146,49 @@ object rojo inherits Color {
 	
 	override method imagen()= "GemaRoja.png"
 	
-	override method puntaje()= 45
+	override method puntaje()= 55
 }
 
 object amarillo inherits Color {
 	
 	override method imagen()= "GemaAmarilla.png"
 	
-	override method puntaje()= 75
+	override method puntaje()= 85
 }
 
 object verde inherits Color {
 	
 	override method imagen()= "GemaVerde.png"
 	
-	override method puntaje()= 30
+	override method puntaje()= 40
 }
 
 object azul inherits Color {
 	
 	override method imagen()= "GemaAzul.png"
 	
-	override method puntaje()= 120
+	override method puntaje()= 130
 }
 
 object violeta inherits Color {
 	
 	override method imagen()= "GemaVioleta.png"
 	
-	override method puntaje()= 90
+	override method puntaje()= 100
 }
 
 object blanca inherits Color {
 	
 	override method imagen()= "GemaBlanca.png"
 	
-	override method puntaje()= 105
+	override method puntaje()= 110
 }
 
 object rosa inherits Color {
 	
 	override method imagen()= "GemaRosa.png"
 	
-	override method puntaje()= 60
+	override method puntaje()= 70
 }
 
 
