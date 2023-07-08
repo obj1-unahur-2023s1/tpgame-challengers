@@ -1,8 +1,11 @@
 import wollok.game.*
-import pepita.*
+import nivel.*
+import marco.*
+import sonido.*
 
-program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+program Bejewollok{
+	nivel.inicio()
 	game.start()
+			
 }
+
